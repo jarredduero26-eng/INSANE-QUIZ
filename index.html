@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06130c">
+  <title>RRED QUIZ! — Classified Mission</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <!-- LOGIN -->
+  <section id="loginPage" class="page login-page">
+    <div class="login-card glass">
+      <div class="mini-logo">RR<span>.</span></div>
+      <p class="eyebrow">CLASSIFIED PERSONNEL ACCESS</p>
+      <h1>RRED <span>QUIZ!</span></h1>
+      <p class="muted">One agent. Thirty questions. One secret universe.</p>
+
+      <div class="agent-stage login-agent-stage">
+        <div class="light-beam"></div>
+        <div class="agent" id="loginAgent">
+          <div class="hat"><span>✦</span></div>
+          <div class="agent-head">
+            <div class="eyes"><i class="eye"><b></b></i><i class="eye"><b></b></i></div>
+            <div class="face-mask"></div>
+          </div>
+          <div class="agent-body"><span>RRED</span><div class="tie"></div></div>
+          <div class="agent-arm"></div><div class="spyglass">◉</div>
+          <div class="agent-leg leg1"></div><div class="agent-leg leg2"></div>
+        </div>
+      </div>
+
+      <form id="loginForm">
+        <label for="email">EMAIL</label>
+        <input id="email" type="email" autocomplete="email"
+          placeholder="agent@example.com" required>
+        <label for="password">DEMO PASSWORD</label>
+        <input id="password" type="password" autocomplete="current-password"
+          placeholder="Enter a demo password" minlength="4" required>
+        <p class="security-note">Demo access only. Never enter your Facebook password here.</p>
+        <p id="loginError" class="error" role="alert"></p>
+        <button class="primary" type="submit">ENTER THE MISSION <span>↗</span></button>
+      </form>
+      <p class="tiny-note">RRED QUIZ // PERSONNEL INTELLIGENCE DIVISION</p>
+    </div>
+  </section>
+
+  <!-- QUIZ GAME -->
+  <section id="gamePage" class="page game-page hidden">
+    <header class="topbar">
+      <div class="wordmark">RRED<span> QUIZ!</span></div>
+      <div class="mission-status"><i></i> MISSION ACTIVE</div>
+      <button id="quitBtn" class="ghost-btn">EXIT ↗</button>
+    </header>
+
+    <main class="game-layout">
+      <section class="world glass">
+        <div class="world-heading">LOCATION: NIGHT FACILITY <span>● LIVE</span></div>
+        <div class="world-light"></div>
+        <div class="floor-grid"></div>
+
+        <div id="startDoor" class="door start-door">
+          <b>01</b><small>START</small><span>✓</span>
+        </div>
+        <div id="nextDoor" class="door next-door">
+          <b>02</b><small>LOCKED</small><span>🔒</span>
+        </div>
+
+        <div id="enemy" class="enemy">
+          <i></i><i></i><b></b>
+        </div>
+
+        <div id="gameAgent" class="agent game-agent">
+          <div class="hat"><span>✦</span></div>
+          <div class="agent-head">
+            <div class="eyes"><i class="eye"><b></b></i><i class="eye"><b></b></i></div>
+            <div class="face-mask"></div>
+          </div>
+          <div class="agent-body"><span>RRED</span><div class="tie"></div></div>
+          <div class="agent-arm"></div><div class="spyglass">◉</div>
+          <div class="agent-leg leg1"></div><div class="agent-leg leg2"></div>
+        </div>
+
+        <div id="worldCaption" class="world-caption">AGENT RRED: AWAITING ORDERS</div>
+        <div id="attackFlash" class="attack-flash"></div>
+        <div class="world-coordinate">SECTOR 026 // NIGHT OPS</div>
+      </section>
+
+      <aside class="quiz-panel glass">
+        <p class="eyebrow">CONFIDENTIAL // PERSONNEL FILE</p>
+        <h2>Agent's <span>Challenge</span></h2>
+        <p class="muted">Think twice. Choose once.</p>
+
+        <div class="stats">
+          <div><small>QUESTION</small><b id="questionCount">01 / 30</b></div>
+          <div><small>AGENT HEARTS</small><b id="hearts" class="hearts">♥ ♥ ♥</b></div>
+        </div>
+        <div class="progress"><div id="progressBar"></div></div>
+
+        <div class="question-card">
+          <p id="questionNumber" class="question-number">QUESTION 01</p>
+          <h3 id="questionText">Loading question...</h3>
+          <div id="answers" class="answers"></div>
+          <p id="feedback" class="feedback" aria-live="polite"></p>
+          <button id="nextBtn" class="primary hidden">OPEN NEXT DOOR →</button>
+        </div>
+        <div class="hint">
+          <b>ⓘ AGENT TIP</b>
+          <p>Look closely at every choice. Some answers sound similar, but only one matches the file.</p>
+        </div>
+      </aside>
+    </main>
+    <footer class="game-footer"><span>RRED QUIZ!</span><span>PERSONAL INTELLIGENCE DIVISION</span><span>BUILD 030</span></footer>
+  </section>
+
+  <!-- CONGRATULATIONS / FRIENDSHIP -->
+  <section id="friendPage" class="page centered-page hidden">
+    <div class="celebration glass">
+      <div class="confetti" aria-hidden="true">✦　✧　✦　✧　✦</div>
+      <div class="clap" aria-label="Clapping hands animation">👏</div>
+      <p class="eyebrow">MISSION ACCOMPLISHED</p>
+      <h1>YOU DID IT, <span>AGENT!</span></h1>
+      <p class="muted">All 30 questions completed. You unlocked the secret file.</p>
+      <div class="score-line" id="congratsScore">30 / 30 QUESTIONS</div>
+      <div class="friend-box">
+        <div class="friend-icon">✉</div>
+        <h2>Can we be friends?</h2>
+        <p>No pressure. I'd be happy to get to know you as a friend.</p>
+        <div class="friend-buttons">
+          <button id="yesFriend" class="primary">YES, LET'S BE FRIENDS ✨</button>
+          <button id="noFriend" class="ghost-btn">NO, THANK YOU</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DENIED -->
+  <section id="exitPage" class="page centered-page hidden">
+    <div class="end-card glass">
+      <div class="big-symbol">🌙</div>
+      <p class="eyebrow">MISSION CLOSED</p>
+      <h1>THANKS FOR VISITING</h1>
+      <p class="muted">No worries. Thanks for playing RRED QUIZ! Have a wonderful day.</p>
+      <button class="primary" id="exitFinish">CLOSE EXPERIENCE</button>
+    </div>
+  </section>
+
+  <!-- SECRET UNIVERSE -->
+  <section id="universePage" class="page universe-page hidden">
+    <div class="universe-stars" id="universeStars"></div>
+    <div class="universe-top">
+      <span>RRED // SECRET UNIVERSE</span>
+      <span id="sceneCount">SCENE 01 / 04</span>
+    </div>
+
+    <div id="universeScene" class="universe-scene scene-heart">
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
+      <div class="cosmic-object" id="cosmicObject">
+        <div class="heart-shape">♥</div>
+        <div class="flower-shape">
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+          <b></b>
+        </div>
+        <div class="like-text">I LIKE YOU</div>
+        <div class="ring-scene">
+          <div class="ring-glow"></div>
+          <div class="ring-band"></div>
+          <div class="ring-stone"></div>
+          <div class="ring-hand">🤲</div>
+        </div>
+      </div>
+      <div class="cosmic-caption" id="cosmicCaption">A little heart, floating in an endless galaxy.</div>
+    </div>
+
+    <div class="universe-bottom">
+      <p id="swipeHelp">SWIPE LEFT OR RIGHT • OR USE THE BUTTON</p>
+      <div class="scene-dots"><i class="active"></i><i></i><i></i><i></i></div>
+      <button id="nextScene" class="primary universe-next">DISCOVER THE NEXT SCENE →</button>
+    </div>
+  </section>
+
+  <!-- FINAL MESSAGE -->
+  <section id="finalPage" class="page centered-page final-page hidden">
+    <div class="final-stars"></div>
+    <div class="final-card glass">
+      <div class="final-planet">✧</div>
+      <p class="eyebrow">END OF TRANSMISSION</p>
+      <h1>THE UNIVERSE IS BIG.</h1>
+      <h2>I'm glad our paths crossed.</h2>
+      <p class="muted">Thank you for exploring my little universe. Whatever your answer, I hope this made you smile.</p>
+      <button id="restartBtn" class="primary">RETURN TO THE BEGINNING ↗</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
